@@ -63,11 +63,14 @@ GROUP BY g.Name;
 
 
 -- 2
--- select count(*) 
--- where GenreId in (select GenreId from Genre where name='Pop' or name='Rock');
--- add where
+SELECT Count(*), g.Name
+FROM Track t
+JOIN Genre g ON t.GenreId = g.GenreId
+where g.Name = "Pop" or g.Name = "Rock"
+GROUP BY g.Name;
 
 -- 3
+
 
 -- Use Distinct
 
@@ -118,7 +121,8 @@ insert into products
 
 create table orders(
     order_id serial PRIMARY KEY,
-    product int references products(product_id) 
+    product int references products(product_id),
+    order_user int references users(UserId) 
 );
 insert into orders
 (product) VALUES
